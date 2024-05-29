@@ -39,7 +39,7 @@ std::string WebsocketHandlerBase::HandleRequestThrow(
           "Upgrade") {
     LOG_WARNING()
         << "Not a GET 'Upgrade: websocket' and 'Connection: Upgrade' request";
-    throw server::handlers::ClientError();
+    NonWebsocketRequest(request, context);
   }
 
   const std::string& secWebsocketKey =
