@@ -51,9 +51,11 @@ class WebsocketHandlerBase : public server::handlers::HttpHandlerBase {
     return true;
   }
 
-  virtual std::string WebsocketHandlerBase::NonWebsocketRequest(
-      const server::http::HttpRequest& request,
-      server::request::RequestContext& context) const = 0;
+  virtual std::string NonWebsocketRequest(
+      const server::http::HttpRequest&,
+      server::request::RequestContext&) const {
+    throw server::handlers::ClientError();
+  }
 
   /// @cond
   void WriteMetrics(utils::statistics::Writer& writer) const;
